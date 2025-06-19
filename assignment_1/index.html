@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management - Admin</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #004c97;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #004c97;
+        }
+
+        input, select, button {
+            width: 97.5%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #004c97;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .product-list {
+            margin-top: 20px;
+        }
+
+        .product-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-list li {
+            background-color: #f8f8f8;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .report {
+            margin-top: 30px;
+        }
+
+        .report button {
+            background-color: #ff9800;
+            margin-right: 10px;
+        }
+
+        .report div {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Product Management - Admin</h1>
+</header>
+
+<div class="container">
+
+    <!-- Add Product Section -->
+    <div class="section">
+        <h2>Create a New Product</h2>
+        <input type="number" id="create-id" placeholder="Product ID" required />
+        <input type="text" id="create-name" placeholder="Product Name" required />
+        <select id="create-category">
+            <option value="BEAUTY_CARE">Beauty Care</option>
+            <option value="VEGETABLES">Vegetables</option>
+            <option value="MEAT">Meat</option>
+            <option value="GROCERIES">Groceries</option>
+            <option value="OTHERS">Others</option>
+        </select>
+        <input type="number" id="create-price" placeholder="Price" required />
+        <input type="number" id="create-quantity" placeholder="Quantity" required />
+        <input type="date" id="create-expiry" />
+        <button onclick="createProduct()">Create Product</button>
+    </div>
+
+    <!-- Update Product Section -->
+    <div class="section">
+        <h2>Update Product</h2>
+        <input type="number" id="update-id" placeholder="Product ID" required />
+        <input type="text" id="update-name" placeholder="Product Name" />
+        <select id="update-category">
+            <option value="BEAUTY_CARE">Beauty Care</option>
+            <option value="VEGETABLES">Vegetables</option>
+            <option value="MEAT">Meat</option>
+            <option value="GROCERIES">Groceries</option>
+            <option value="OTHERS">Others</option>
+        </select>
+        <input type="number" id="update-price" placeholder="Price" />
+        <input type="number" id="update-quantity" placeholder="Quantity" />
+        <input type="date" id="update-expiry" />
+        <button onclick="updateProduct()">Update Product</button>
+    </div>
+
+    <!-- Delete Product Section -->
+    <div class="section">
+        <h2>Delete Product</h2>
+        <input type="number" id="delete-id" placeholder="Product ID" required />
+        <button onclick="deleteProduct()">Delete Product</button>
+    </div>
+
+    <!-- Product List Section -->
+    <div class="section product-list">
+        <h2>Product List</h2>
+        <button onclick="loadProducts()">Load All Products</button>
+        <ul id="product-list"></ul>
+    </div>
+
+    <!-- Reports Section -->
+    <div class="report">
+        <h2>Reports</h2>
+        <button onclick="loadTotalValueByCategory()">Total Value by Category</button>
+        <button onclick="loadDiscountedProductsByCategory()">Discounted Products by Category</button>
+
+        <div id="total-value-report"></div>
+        <div id="discounted-products-report"></div>
+    </div>
+</div>
+
+<script>
+    const BASE_URL = 'http://localhost:8081/api';  // Update with correct API endpoint
+
+    // Function to create a product
+  // Function to create a product
+// Function to validate the product fields before creating
+function validateCreateProductFields(product) {
+    // Check if the ID is valid (not zero or empty)
+    if (product.id <= 0) {
+        alert("Product ID must be greater than 0.");
+        return false;
+    }
+
+    // Check if the name is not empty
+    if (!product.name || product.name.trim() === "") {
+        alert("Product Name cannot be empty.");
+        return false;
+    }
+
+    // Check if the price is valid (greater than zero)
+    if (product.price <= 0) {
+        alert("Price must be greater than 0.");
+        return false;
+    }
+
+    // Check if the quantity is valid (greater than zero)
+    if (product.quantity <= 0) {
+        alert("Quantity must be greater than 0.");
+        return false;
+    }
+
+    // Check if the expiry date is a valid future date
+    if (new Date(product.expiryDate) <= new Date()) {
+        alert("Expiry date must be in the future.");
+        return false;
+    }
+
+    return true;
+}
+
+
+// Function to create a product
+function createProduct() {
+    const product = {
+        id: document.getElementById('create-id').value,
+        name: document.getElementById('create-name').value,
+        category: document.getElementById('create-category').value,
+        price: document.getElementById('create-price').value,
+        quantity: document.getElementById('create-quantity').value,
+        expiryDate: document.getElementById('create-expiry').value,
+    };
+
+    // Validate product fields
+    if (!validateCreateProductFields(product)) {
+        return;
+    }
+
+    // Check if the product ID already exists
+    fetch(`${BASE_URL}/products/${product.id}`)
+        .then(response => {
+           
+                // If the product doesn't exist, proceed to create the product
+                fetch(`${BASE_URL}/admin/productsCreate`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(product)
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to create product');
+
+                    if (response.status === 204) {
+                        alert("Product created successfully!");
+                        return;
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    if (data) {
+                        alert("Product created successfully!");
+                    }
+                })
+                .catch(error => {
+                    alert("Error: " + error.message);
+                });
+            }
+        )
+        .catch(error => {
+            alert("Error checking ID: " + error.message);
+        });
+}
+
+// Function to validate fields before updating
+function validateUpdateProductFields(product) {
+    
+    if (product.id <= 0) {
+        alert("Product ID must be greater than 0.");
+        return false;
+    }
+       // Check if the name is not empty
+    if (!product.name || product.name.trim() === "") {
+        alert("Product Name cannot be empty.");
+        return false;
+    }
+
+    if (product.price <= 0) {
+        alert("Price must be greater than 0.");
+        return false;
+    }
+
+    // Check if the quantity is valid (greater than zero)
+    if (product.quantity <= 0) {
+        alert("Quantity must be greater than 0.");
+        return false;
+    }
+
+    // Check if the expiry date is a valid future date
+    if (new Date(product.expiryDate) <= new Date()) {
+        alert("Expiry date must be in the future.");
+        return false;
+    }
+
+   
+
+    return true;
+}
+
+// Function to update a product
+function updateProduct() {
+    const product = {
+        id: document.getElementById('update-id').value,
+        name: document.getElementById('update-name').value,
+        category: document.getElementById('update-category').value,
+        price: document.getElementById('update-price').value,
+        quantity: document.getElementById('update-quantity').value,
+        expiryDate: document.getElementById('update-expiry').value,
+    };
+
+    // Validate product fields
+    if (!validateUpdateProductFields(product)) {
+        return;
+    }
+
+    fetch(`${BASE_URL}/admin/productsUpdate/${product.id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(product)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Failed to update product');
+        alert("Product updated successfully!");
+    })
+    .catch(error => alert("Error: " + error.message));
+}
+
+// Function to delete a product
+function deleteProduct() {
+    const productId = document.getElementById('delete-id').value;
+
+    // Check if product ID is valid
+    if (productId <= 0) {
+        alert("Product ID must be greater than 0.");
+        return;
+    }
+
+    fetch(`${BASE_URL}/admin/productsDelete/${productId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Failed to delete product');
+        alert("Product deleted successfully!");
+    })
+    .catch(error => alert("Error: " + error.message));
+}
+
+
+    // Function to delete a product
+    function deleteProduct() {
+        const productId = document.getElementById('delete-id').value;
+
+        fetch(`${BASE_URL}/admin/productsDelete/${productId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to delete product');
+            alert("Product deleted successfully!");
+        })
+        .catch(error => alert("Error: " + error.message));
+    }
+
+    // Function to load all products
+    function loadProducts() {
+        fetch(`${BASE_URL}/products`)
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('product-list');
+                list.innerHTML = '';
+                data.forEach(product => {
+                    const li = document.createElement('li');
+                    li.textContent = `ID: ${product.id}, Name: ${product.name}, Category: ${product.category}, Price: ${product.price}, Quantity: ${product.quantity}, Expiry: ${product.expiryDate}, Discount: ${product.discount}%`;
+                    list.appendChild(li);
+                });
+            })
+            .catch(error => alert("Error loading products: " + error.message));
+    }
+
+    // Function to load Total Value by Category
+    function loadTotalValueByCategory() {
+        fetch(`${BASE_URL}/products/total-value`)
+            .then(res => res.json())
+            .then(report => {
+                const reportDiv = document.getElementById('total-value-report');
+                reportDiv.innerHTML = "<h3>Total Value by Category:</h3>";
+                for (const [category, value] of Object.entries(report)) {
+                    const p = document.createElement('p');
+                    p.textContent = `${category}: ${value}`;
+                    reportDiv.appendChild(p);
+                }
+            })
+            .catch(error => alert("Error loading total value: " + error.message));
+    }
+
+    // Function to load Discounted Products by Category
+    function loadDiscountedProductsByCategory() {
+        fetch(`${BASE_URL}/products/discounted-by-category`)
+            .then(res => res.json())
+            .then(report => {
+                const reportDiv = document.getElementById('discounted-products-report');
+                reportDiv.innerHTML = "<h3>Discounted Products by Category:</h3>";
+                for (const [category, products] of Object.entries(report)) {
+                    const categoryHeading = document.createElement('h4');
+                    categoryHeading.textContent = category;
+                    reportDiv.appendChild(categoryHeading);
+
+                    products.forEach(product => {
+                        const p = document.createElement('p');
+                        p.textContent = `ID: ${product.id}, Name: ${product.name}, Price: ${product.price}, Discount: ${product.discount}%`;
+                        reportDiv.appendChild(p);
+                    });
+                }
+            })
+            .catch(error => alert("Error loading discounted products: " + error.message));
+    }
+</script>
+
+</body>
+</html>
+
