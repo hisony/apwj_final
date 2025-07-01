@@ -158,22 +158,35 @@ public class ClassScheduleRepository {
         jdbcTemplate.update("DELETE FROM class_schedule WHERE course_id = ?", courseId);
     }
 
+
+
     private ClassSchedule mapRowToClassSchedule(Map<String, Object> row) {
         ClassSchedule schedule = new ClassSchedule();
         schedule.setId(((Number) row.get("id")).longValue());
-
         Course course = new Course();
         course.setId(((Number) row.get("course_id")).longValue());
         course.setName((String) row.get("course_name"));
         course.setCode((String) row.get("course_code"));
         course.setDepartment((String) row.get("course_department"));
         schedule.setCourse(course);
-
         schedule.setDayOfWeek((String) row.get("day_of_week"));
-        schedule.setStartTime(((Timestamp) row.get("start_time")).toLocalDateTime());
-        schedule.setEndTime(((Timestamp) row.get("end_time")).toLocalDateTime());
+        Object startTimeObj = row.get("start_time");
+        if (startTimeObj instanceof Timestamp) {
+            schedule.setStartTime(((Timestamp) startTimeObj).toLocalDateTime());
+        } else if (startTimeObj instanceof LocalDateTime) {
+            schedule.setStartTime((LocalDateTime) startTimeObj);
+        } else {
+            schedule.setStartTime(null);
+        }
+        Object endTimeObj = row.get("end_time");
+        if (endTimeObj instanceof Timestamp) {
+            schedule.setEndTime(((Timestamp) endTimeObj).toLocalDateTime());
+        } else if (endTimeObj instanceof LocalDateTime) {
+            schedule.setEndTime((LocalDateTime) endTimeObj);
+        } else {
+            schedule.setEndTime(null);
+        }
         schedule.setRoom((String) row.get("room"));
-
         return schedule;
     }
 }

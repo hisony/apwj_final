@@ -25,6 +25,54 @@ public class UniversityManagementApplication {
 		SpringApplication.run(UniversityManagementApplication.class, args);
 
 	}
-	
+
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests(auth -> auth
+
+								// ALLOWED
+//                 .requestMatchers(HttpMethod.GET, "/api/students/*").permitAll()
+//                 .requestMatchers(HttpMethod.GET, "/api/teachers/*").permitAll()
+//                 .requestMatchers(HttpMethod.GET, "/api/courses/*").permitAll()
+//                 .requestMatchers(HttpMethod.GET, "/api/enrollments/*").permitAll()
+
+								// TEMP
+								.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+
+
+								// SECURED
+								.requestMatchers(HttpMethod.POST, "/api/**").permitAll()
+								.requestMatchers(HttpMethod.PUT, "/api/**").permitAll()
+								.requestMatchers(HttpMethod.DELETE, "/api/**").permitAll()
+
+						// OTHER
+//                 .anyRequest().authenticated()
+				)
+				.httpBasic(Customizer.withDefaults());
+		return http.build();
+	}
+
+	//  @Bean
+//  public JdbcUserDetailsManager userDetailsService(DataSource dataSource) {
+//     return new JdbcUserDetailsManager(dataSource);
+//  }
+	@Bean
+	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+		UserDetails user = User.withUsername("admin")
+				.password(passwordEncoder().encode("1234"))
+				.roles("ADMIN")
+				.build();
+		return new InMemoryUserDetailsManager(user);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+
 
 }
