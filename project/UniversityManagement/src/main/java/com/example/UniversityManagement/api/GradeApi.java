@@ -118,24 +118,24 @@ public class GradeApi {
     }
 
     // Get average grade for a student
-    @GetMapping("/student/{studentId}/average")
-    public ResponseEntity<Double> getStudentAverageGrade(@PathVariable("studentId") Long studentId) {
-        try {
-            Double average = gradeService.getStudentAverageGrade(studentId);
-            return new ResponseEntity<>(average, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/student/{studentId}/average")
+//    public ResponseEntity<Double> getStudentAverageGrade(@PathVariable("studentId") Long studentId) {
+//        try {
+//            Double average = gradeService.getStudentAverageGrade(studentId);
+//            return new ResponseEntity<>(average, HttpStatus.OK);
+//        } catch (IllegalArgumentException e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     // Get average grade for a course
-    @GetMapping("/course/{courseId}/average")
-    public ResponseEntity<Double> getCourseAverageGrade(@PathVariable("courseId") Long courseId) {
-        try {
-            Double average = gradeService.getCourseAverageGrade(courseId);
-            return new ResponseEntity<>(average, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/course/{courseId}/average")
+//    public ResponseEntity<Double> getCourseAverageGrade(@PathVariable("courseId") Long courseId) {
+//        try {
+//            Double average = gradeService.getCourseAverageGrade(courseId);
+//            return new ResponseEntity<>(average, HttpStatus.OK);
+//        } catch (IllegalArgumentException e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

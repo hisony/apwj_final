@@ -1,0 +1,36 @@
+2025-07-01 22:50:21 - Starting UniversityManagementApplication using Java 24.0.1 with PID 38701 (/Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement/target/classes started by sonyzaman in /Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement)
+2025-07-01 22:50:21 - No active profile set, falling back to 1 default profile: "default"
+2025-07-01 22:50:21 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-07-01 22:50:21 - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2025-07-01 22:50:22 - Tomcat initialized with port 8080 (http)
+2025-07-01 22:50:22 - Starting service [Tomcat]
+2025-07-01 22:50:22 - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-01 22:50:22 - Initializing Spring embedded WebApplicationContext
+2025-07-01 22:50:22 - Root WebApplicationContext: initialization completed in 968 ms
+2025-07-01 22:50:22 - HikariPool-1 - Starting...
+2025-07-01 22:50:22 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ac044ef
+2025-07-01 22:50:22 - HikariPool-1 - Start completed.
+2025-07-01 22:50:22 - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-07-01 22:50:23 - Exposing 1 endpoint beneath base path '/actuator'
+2025-07-01 22:50:23 - Tomcat started on port 8080 (http) with context path '/'
+2025-07-01 22:50:23 - Started UniversityManagementApplication in 2.33 seconds (process running for 2.552)
+2025-07-01 22:51:27 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-01 22:51:27 - Graceful shutdown complete
+2025-07-01 22:51:27 - HikariPool-1 - Shutdown initiated...
+2025-07-01 22:51:27 - HikariPool-1 - Shutdown completed.
+2025-07-01 22:51:45 - Starting UniversityManagementApplication using Java 24.0.1 with PID 38716 (/Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement/target/classes started by sonyzaman in /Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement)
+2025-07-01 22:51:45 - No active profile set, falling back to 1 default profile: "default"
+2025-07-01 22:51:46 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-07-01 22:51:46 - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
+2025-07-01 22:51:46 - Tomcat initialized with port 8080 (http)
+2025-07-01 22:51:46 - Starting service [Tomcat]
+2025-07-01 22:51:46 - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-01 22:51:46 - Initializing Spring embedded WebApplicationContext
+2025-07-01 22:51:46 - Root WebApplicationContext: initialization completed in 906 ms
+2025-07-01 22:51:46 - HikariPool-1 - Starting...
+2025-07-01 22:51:46 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c8efde4
+2025-07-01 22:51:46 - HikariPool-1 - Start completed.
+2025-07-01 22:51:47 - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-07-01 22:51:47 - Exposing 1 endpoint beneath base path '/actuator'
+2025-07-01 22:51:47 - Tomcat started on port 8080 (http) with context path '/'
+2025-07-01 22:51:47 - Started UniversityManagementApplication in 2.282 seconds (process running for 2.509)
