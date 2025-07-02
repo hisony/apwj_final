@@ -1,36 +1,42 @@
-2025-07-01 22:50:21 - Starting UniversityManagementApplication using Java 24.0.1 with PID 38701 (/Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement/target/classes started by sonyzaman in /Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement)
-2025-07-01 22:50:21 - No active profile set, falling back to 1 default profile: "default"
-2025-07-01 22:50:21 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-07-01 22:50:21 - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
-2025-07-01 22:50:22 - Tomcat initialized with port 8080 (http)
-2025-07-01 22:50:22 - Starting service [Tomcat]
-2025-07-01 22:50:22 - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-07-01 22:50:22 - Initializing Spring embedded WebApplicationContext
-2025-07-01 22:50:22 - Root WebApplicationContext: initialization completed in 968 ms
-2025-07-01 22:50:22 - HikariPool-1 - Starting...
-2025-07-01 22:50:22 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ac044ef
-2025-07-01 22:50:22 - HikariPool-1 - Start completed.
-2025-07-01 22:50:22 - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-07-01 22:50:23 - Exposing 1 endpoint beneath base path '/actuator'
-2025-07-01 22:50:23 - Tomcat started on port 8080 (http) with context path '/'
-2025-07-01 22:50:23 - Started UniversityManagementApplication in 2.33 seconds (process running for 2.552)
-2025-07-01 22:51:27 - Commencing graceful shutdown. Waiting for active requests to complete
-2025-07-01 22:51:27 - Graceful shutdown complete
-2025-07-01 22:51:27 - HikariPool-1 - Shutdown initiated...
-2025-07-01 22:51:27 - HikariPool-1 - Shutdown completed.
-2025-07-01 22:51:45 - Starting UniversityManagementApplication using Java 24.0.1 with PID 38716 (/Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement/target/classes started by sonyzaman in /Users/sonyzaman/Desktop/giiit/apwj_final/project/UniversityManagement)
-2025-07-01 22:51:45 - No active profile set, falling back to 1 default profile: "default"
-2025-07-01 22:51:46 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-07-01 22:51:46 - Finished Spring Data repository scanning in 8 ms. Found 0 JDBC repository interfaces.
-2025-07-01 22:51:46 - Tomcat initialized with port 8080 (http)
-2025-07-01 22:51:46 - Starting service [Tomcat]
-2025-07-01 22:51:46 - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-07-01 22:51:46 - Initializing Spring embedded WebApplicationContext
-2025-07-01 22:51:46 - Root WebApplicationContext: initialization completed in 906 ms
-2025-07-01 22:51:46 - HikariPool-1 - Starting...
-2025-07-01 22:51:46 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c8efde4
-2025-07-01 22:51:46 - HikariPool-1 - Start completed.
-2025-07-01 22:51:47 - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-07-01 22:51:47 - Exposing 1 endpoint beneath base path '/actuator'
-2025-07-01 22:51:47 - Tomcat started on port 8080 (http) with context path '/'
-2025-07-01 22:51:47 - Started UniversityManagementApplication in 2.282 seconds (process running for 2.509)
+2025-07-02 07:38:35 - Starting UniversityManagementApplication using Java 24.0.1 with PID 47180 (/Users/sonyzaman/Downloads/UniversityManagement/target/classes started by sonyzaman in /Users/sonyzaman/Downloads/UniversityManagement)
+2025-07-02 07:38:35 - No active profile set, falling back to 1 default profile: "default"
+2025-07-02 07:38:36 - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-07-02 07:38:36 - Finished Spring Data repository scanning in 12 ms. Found 0 JDBC repository interfaces.
+2025-07-02 07:38:37 - Tomcat initialized with port 8080 (http)
+2025-07-02 07:38:37 - Starting service [Tomcat]
+2025-07-02 07:38:37 - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-02 07:38:37 - Initializing Spring embedded WebApplicationContext
+2025-07-02 07:38:37 - Root WebApplicationContext: initialization completed in 1527 ms
+2025-07-02 07:38:37 - No authentication manager set. Reauthentication of users when changing passwords will not be performed.
+2025-07-02 07:38:37 - HikariPool-1 - Starting...
+2025-07-02 07:38:37 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ccc1026
+2025-07-02 07:38:37 - HikariPool-1 - Start completed.
+2025-07-02 07:38:38 - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2025-07-02 07:38:38 - Exposing 1 endpoint beneath base path '/actuator'
+2025-07-02 07:38:39 - Tomcat started on port 8080 (http) with context path '/'
+2025-07-02 07:38:39 - Started UniversityManagementApplication in 3.967 seconds (process running for 4.378)
+2025-07-02 07:39:59 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-02 07:39:59 - Initializing Servlet 'dispatcherServlet'
+2025-07-02 07:39:59 - Completed initialization in 4 ms
+2025-07-02 07:44:14 - User: Anonymous, Accessed Method: getUserByUsername, Timestamp: 2025-07-02T07:44:14.199897
+2025-07-02 07:44:14 - User: Anonymous, Accessed Method: findByUsername, Timestamp: 2025-07-02T07:44:14.208669
+2025-07-02 07:44:14 - User: Anonymous, Successfully Executed Method: findByUsername, Timestamp: 2025-07-02T07:44:14.248736
+2025-07-02 07:44:14 - User: Anonymous, Successfully Executed Method: getUserByUsername, Timestamp: 2025-07-02T07:44:14.249969
+2025-07-02 07:45:49 - User: admin, Accessed Method: logout, Timestamp: 2025-07-02T07:45:49.018248
+2025-07-02 07:45:49 - User: Anonymous, Successfully Executed Method: logout, Timestamp: 2025-07-02T07:45:49.022494
+2025-07-02 07:46:00 - User: Anonymous, Accessed Method: getAllUsers, Timestamp: 2025-07-02T07:46:00.250148
+2025-07-02 07:46:00 - User: Anonymous, Accessed Method: getAllUsers, Timestamp: 2025-07-02T07:46:00.251739
+2025-07-02 07:46:00 - User: Anonymous, Accessed Method: findAll, Timestamp: 2025-07-02T07:46:00.256693
+2025-07-02 07:46:00 - User: Anonymous, Successfully Executed Method: findAll, Timestamp: 2025-07-02T07:46:00.275221
+2025-07-02 07:46:00 - User: Anonymous, Successfully Executed Method: getAllUsers, Timestamp: 2025-07-02T07:46:00.275484
+2025-07-02 07:46:00 - User: Anonymous, Successfully Executed Method: getAllUsers, Timestamp: 2025-07-02T07:46:00.275577
+2025-07-02 07:46:08 - User: Anonymous, Accessed Method: getAllStudents, Timestamp: 2025-07-02T07:46:08.507884
+2025-07-02 07:46:08 - User: Anonymous, Accessed Method: getAllStudents, Timestamp: 2025-07-02T07:46:08.509118
+2025-07-02 07:46:08 - User: Anonymous, Accessed Method: findAll, Timestamp: 2025-07-02T07:46:08.512520
+2025-07-02 07:46:08 - User: Anonymous, Successfully Executed Method: findAll, Timestamp: 2025-07-02T07:46:08.535867
+2025-07-02 07:46:08 - User: Anonymous, Successfully Executed Method: getAllStudents, Timestamp: 2025-07-02T07:46:08.536704
+2025-07-02 07:46:08 - User: Anonymous, Successfully Executed Method: getAllStudents, Timestamp: 2025-07-02T07:46:08.539194
+2025-07-02 08:01:29 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-02 08:01:29 - Graceful shutdown complete
+2025-07-02 08:01:29 - HikariPool-1 - Shutdown initiated...
+2025-07-02 08:01:29 - HikariPool-1 - Shutdown completed.

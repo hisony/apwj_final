@@ -22,15 +22,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    // Get a user by ID
-    public User getUserById(Long id) {
-        User user = userRepository.findById(id);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found with id: " + id);
-        }
-        return user;
-    }
-
     // Get a user by username
     public User getUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
@@ -49,36 +40,51 @@ public class UserService {
             throw new IllegalArgumentException("Password cannot be empty");
         }
 
-        // You should hash the password before storing it (e.g., using bcrypt or Argon2)
+        // Check if user already exists
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("User with username '" + user.getUsername() + "' already exists");
+        }
+
+        // Hash?
         userRepository.save(user);
     }
 
     // Update an existing user
-    public void updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id);
+    public void updateUser(String username, User user) {
+        User existingUser = userRepository.findByUsername(username);
         if (existingUser == null) {
-            throw new IllegalArgumentException("User not found with id: " + id);
+            throw new IllegalArgumentException("User not found with username: " + username);
         }
 
-        user.setId(id);
+        // Ensure the username in the user object matches the path parameter
+        user.setUsername(username);
         userRepository.save(user);
     }
 
-    // Delete a user by ID
-    public void deleteUser(Long id) {
-        User existingUser = userRepository.findById(id);
+    // Delete a user by username
+    public void deleteUser(String username) {
+        User existingUser = userRepository.findByUsername(username);
         if (existingUser == null) {
-            throw new IllegalArgumentException("User not found with id: " + id);
+            throw new IllegalArgumentException("User not found with username: " + username);
         }
 
-        userRepository.deleteById(id);
+        userRepository.deleteByUsername(username);
+    }
+
+    public void resetPassword(String username, String newPassword) {
+        User user = userRepository.findByUsername(username);
+
+        if (user != null) {
+            //user.setPassword(passwordEncoder.encode(newPassword)); // Encode the new password
+            userRepository.save(user); // Save the updated user back to the database
+        }
     }
 
     // Disable or enable user account
-    public void toggleUserEnabled(Long id, boolean enabled) {
-        User existingUser = userRepository.findById(id);
+    public void toggleUserEnabled(String username, boolean enabled) {
+        User existingUser = userRepository.findByUsername(username);
         if (existingUser == null) {
-            throw new IllegalArgumentException("User not found with id: " + id);
+            throw new IllegalArgumentException("User not found with username: " + username);
         }
 
         existingUser.setEnabled(enabled);

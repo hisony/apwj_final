@@ -3,23 +3,14 @@ package com.example.UniversityManagement.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
-    private Long id;
-
     private String username;
 
     private String password;
 
     private boolean enabled;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

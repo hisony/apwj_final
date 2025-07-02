@@ -21,12 +21,11 @@ public class UserRepository {
 
     // Find all users
     public List<User> findAll() {
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT * FROM users");
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT * FROM user");
         List<User> users = new ArrayList<>();
 
         for (Map<String, Object> row : rows) {
             User user = new User();
-            user.setId(((Number) row.get("id")).longValue());
             user.setUsername((String) row.get("username"));
             user.setPassword((String) row.get("password"));
             user.setEnabled((Boolean) row.get("enabled"));
@@ -35,50 +34,58 @@ public class UserRepository {
         return users;
     }
 
-    // Find a user by ID
-    public User findById(Long id) {
-        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM users WHERE id = ?", id);
-        User user = new User();
-        user.setId(((Number) row.get("id")).longValue());
-        user.setUsername((String) row.get("username"));
-        user.setPassword((String) row.get("password"));
-        user.setEnabled((Boolean) row.get("enabled"));
-        return user;
+    // Find a user by username (primary key)
+    public User findByUsername(String username) {
+        try {
+            Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM user WHERE username = ?", username);
+            User user = new User();
+            user.setUsername((String) row.get("username"));
+            user.setPassword((String) row.get("password"));
+            user.setEnabled((Boolean) row.get("enabled"));
+            return user;
+        } catch (Exception e) {
+            return null; // User not found
+        }
     }
+
+
 
     // Save or update a user
     public void save(User user) {
-        if (user.getId() == null) {
+        // Check if user exists
+        User existingUser = findByUsername(user.getUsername());
+        
+        if (existingUser == null) {
+            // Insert new user
             jdbcTemplate.update(
-                    "INSERT INTO users (username, password, enabled) VALUES (?, ?, ?)",
+                    "INSERT INTO user (username, password, enabled) VALUES (?, ?, ?)",
                     user.getUsername(),
                     user.getPassword(),
                     user.isEnabled()
             );
         } else {
+            // Update existing user
             jdbcTemplate.update(
-                    "UPDATE users SET username = ?, password = ?, enabled = ? WHERE id = ?",
-                    user.getUsername(),
+                    "UPDATE user SET password = ?, enabled = ? WHERE username = ?",
                     user.getPassword(),
                     user.isEnabled(),
-                    user.getId()
+                    user.getUsername()
             );
         }
     }
 
-    // Delete user by ID
-    public void deleteById(Long id) {
-        jdbcTemplate.update("DELETE FROM users WHERE id = ?", id);
+    // Delete user by username
+    public void deleteByUsername(String username) {
+        jdbcTemplate.update("DELETE FROM user WHERE username = ?", username);
     }
 
-    // Find user by username
-    public User findByUsername(String username) {
-        Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM users WHERE username = ?", username);
-        User user = new User();
-        user.setId(((Number) row.get("id")).longValue());
-        user.setUsername((String) row.get("username"));
-        user.setPassword((String) row.get("password"));
-        user.setEnabled((Boolean) row.get("enabled"));
-        return user;
+    // Check if user exists by username
+    public boolean existsByUsername(String username) {
+        try {
+            jdbcTemplate.queryForMap("SELECT username FROM user WHERE username = ?", username);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
