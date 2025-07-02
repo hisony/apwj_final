@@ -1,3 +1,7 @@
 2025-07-03 00:41:09 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m27s946ms).
 2025-07-03 02:05:40 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m29s771ms).
 2025-07-03 02:12:45 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m5s991ms).
+2025-07-03 03:03:12 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-03 03:03:12 - Graceful shutdown complete
+2025-07-03 03:03:12 - HikariPool-1 - Shutdown initiated...
+2025-07-03 03:03:12 - HikariPool-1 - Shutdown completed.
