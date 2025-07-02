@@ -110,6 +110,7 @@ public class UniversityManagementApplication {
 						.requestMatchers(HttpMethod.GET, "/api/enrollments/*").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/users/logout").permitAll()
+
 						// SECURED
 						.requestMatchers(HttpMethod.POST, "/api/**").authenticated()
 						.requestMatchers(HttpMethod.PUT, "/api/**").authenticated()

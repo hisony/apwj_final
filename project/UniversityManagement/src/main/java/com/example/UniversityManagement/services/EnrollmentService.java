@@ -52,29 +52,30 @@ public class EnrollmentService {
     }
 
     public void createEnrollment(Long studentId, Long courseId) {
-            Student student = studentRepository.findById(studentId);
-            if (student == null) {
-                throw new IllegalArgumentException("Student not found with id: " + studentId);
-            }
+        Student student = studentRepository.findById(studentId);
+        if (student == null) {
+            throw new IllegalArgumentException("Student not found with id: " + studentId);
+        }
 
-            Course course = courseRepository.findById(courseId);
-            if (course == null) {
-                throw new IllegalArgumentException("Course not found with id: " + courseId);
-            }
+        Course course = courseRepository.findById(courseId);
+        if (course == null) {
+            throw new IllegalArgumentException("Course not found with id: " + courseId);
+        }
 
-            if (enrollmentRepository.existsByStudentAndCourse(studentId, courseId)) {
-                throw new IllegalArgumentException(
-                        "Student is already enrolled in this course"
-                );
-            }
+        if (enrollmentRepository.existsByStudentAndCourse(studentId, courseId)) {
+            throw new IllegalArgumentException(
+                    "Student is already enrolled in this course"
+            );
+        }
 
-            Enrollment enrollment = new Enrollment();
-            enrollment.setStudent(student);
-            enrollment.setCourse(course);
-            enrollment.setEnrollmentDate(LocalDate.now());
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setCourse(course);
+        enrollment.setEnrollmentDate(LocalDate.now());
 
-            enrollmentRepository.save(enrollment);
+        enrollmentRepository.save(enrollment);
     }
+
 
     public void updateEnrollment(Long id, Long studentId, Long courseId) {
             Enrollment existingEnrollment = enrollmentRepository.findById(id);

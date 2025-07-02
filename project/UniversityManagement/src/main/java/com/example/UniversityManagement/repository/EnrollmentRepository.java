@@ -119,6 +119,7 @@ public class EnrollmentRepository {
         }
     }
 
+
     public void deleteById(Long id) {
         jdbcTemplate.update("DELETE FROM enrollment WHERE id = ?", id);
     }

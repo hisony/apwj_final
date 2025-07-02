@@ -58,18 +58,17 @@ public class GradeService {
     }
 
     public void createGrade(Long studentId, Long courseId, String grade) {
+        // Find the student by id, throw an exception if not found
         Student student = studentRepository.findById(studentId);
-        if (student == null) {
-            throw new IllegalArgumentException("Student not found with id: " + studentId);
-        }
 
+        // Find the course by id, throw an exception if not found
         Course course = courseRepository.findById(courseId);
-        if (course == null) {
-            throw new IllegalArgumentException("Course not found with id: " + courseId);
-        }
 
+
+        // Validate the grade
         validateGrade(grade);
 
+        // Create and save the new grade entity
         Grade newGrade = new Grade();
         newGrade.setStudent(student);
         newGrade.setCourse(course);
@@ -78,17 +77,9 @@ public class GradeService {
         gradeRepository.save(newGrade);
     }
 
-    public void updateGrade(Long id, String grade) {
-        Grade existingGrade = gradeRepository.findById(id);
-        if (existingGrade == null) {
-            throw new IllegalArgumentException("Grade not found with id: " + id);
-        }
 
-        validateGrade(grade);
 
-        existingGrade.setGrade(grade);
-        gradeRepository.save(existingGrade);
-    }
+
 
     public void deleteGrade(Long id) {
         Grade grade = gradeRepository.findById(id);

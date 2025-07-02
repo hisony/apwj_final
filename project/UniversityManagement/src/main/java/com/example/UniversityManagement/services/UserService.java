@@ -49,6 +49,25 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    public void changePassword(String username, String newPassword) {
+        // Find user by username
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with username: " + username);
+        }
+
+        // Encode the new password before saving
+        String encodedPassword = newPassword;
+
+        // Set the new encoded password
+        user.setPassword(encodedPassword);
+
+        // Save the updated user back to the database
+        userRepository.updatePass(user);
+    }
+
     // Update an existing user
     public void updateUser(String username, User user) {
         User existingUser = userRepository.findByUsername(username);

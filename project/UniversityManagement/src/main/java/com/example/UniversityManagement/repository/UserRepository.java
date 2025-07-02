@@ -74,6 +74,11 @@ public class UserRepository {
         }
     }
 
+    public void updatePass(User user) {
+        String query = "UPDATE user SET password = ? WHERE username = ?";
+        jdbcTemplate.update(query, user.getPassword(), user.getUsername());
+    }
+
     // Delete user by username
     public void deleteByUsername(String username) {
         jdbcTemplate.update("DELETE FROM user WHERE username = ?", username);

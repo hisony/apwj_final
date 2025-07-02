@@ -56,7 +56,8 @@ public class UserApi {
     }
 
     // Get user by username
-    @GetMapping("/{username}")
+    //http://localhost:8080/api/users/profile/admin
+    @GetMapping("/profile/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
         try {
             User user = userService.getUserByUsername(username);
@@ -99,8 +100,23 @@ public class UserApi {
         }
     }
 
+    //http://localhost:8080/api/users/change_password/admin2?newPassword=yourNewPassword
+
+    @PutMapping("/change_password/{username}")
+    public ResponseEntity<String> changePassword(@PathVariable("username") String username,
+                                                 @RequestParam("newPassword") String newPassword) {
+        try {
+            // Call service method to change the password
+            userService.changePassword(username, newPassword);
+            return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            // If user not found or any other issue occurs
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
     // Toggle user enabled status
-    @PutMapping("/{username}/enabled")
+    @PutMapping("/forget_pass/{username}/enabled")
     public ResponseEntity<String> toggleUserEnabled(@PathVariable("username") String username, @RequestParam boolean enabled) {
         try {
             userService.toggleUserEnabled(username, enabled);
@@ -110,23 +126,23 @@ public class UserApi {
         }
     }
 
-    @PutMapping("/forget-pass")
-    public String reset(@RequestBody Map<String, String> loginRequest) {
-        String username = loginRequest.get("username");
-        String password = loginRequest.get("password");
-        String newPassword = loginRequest.get("newPassword"); // Retrieve the new password
-
-        // Fetch the user from the service
-        User user = userService.getUserByUsername(username);
-
-        // Check if user exists and the current password matches
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            userService.resetPassword(username, newPassword); // Call the service to reset the password
-            return "Password reset successful"; // Return success message
-        } else {
-            return "Invalid username or password"; // Return error message
-        }
-    }
+//    @PutMapping("/forget-pass")
+//    public String reset(@RequestBody Map<String, String> loginRequest) {
+//        String username = loginRequest.get("username");
+//        String password = loginRequest.get("password");
+//        String newPassword = loginRequest.get("newPassword"); // Retrieve the new password
+//
+//        // Fetch the user from the service
+//        User user = userService.getUserByUsername(username);
+//
+//        // Check if user exists and the current password matches
+//        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+//            userService.resetPassword(username, newPassword); // Call the service to reset the password
+//            return "Password reset successful"; // Return success message
+//        } else {
+//            return "Invalid username or password"; // Return error message
+//        }
+//    }
 
 
     @PostMapping("/login")

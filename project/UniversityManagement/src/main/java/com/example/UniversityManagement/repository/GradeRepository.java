@@ -108,12 +108,12 @@ public class GradeRepository {
             );
         } else {
             jdbcTemplate.update(
-                    "UPDATE grade SET student_id = ?, course_id = ?, grade = ? WHERE id = ?",
-                    grade.getStudent().getId(),
-                    grade.getCourse().getId(),
-                    grade.getGrade(),
-                    grade.getId()
+                    "UPDATE grade SET grade = ? WHERE student_id = ? AND course_id = ?",
+                    grade.getGrade(),   // The grade to update
+                    grade.getStudent().getId(),  // The student ID
+                    grade.getCourse().getId()  // The course ID
             );
+
         }
     }
 

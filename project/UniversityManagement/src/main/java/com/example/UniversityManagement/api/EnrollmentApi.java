@@ -54,13 +54,13 @@ public class EnrollmentApi {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<?> createEnrollment(@Valid @RequestBody Enrollment enrollment) {
+    @PostMapping("/enroll/{studentId}/{courseId}")
+    public ResponseEntity<?> createEnrollment(
+            @PathVariable("studentId") Long studentId,
+            @PathVariable("courseId") Long courseId) {
+
         try {
-            enrollmentService.createEnrollment(
-                    enrollment.getStudent().getId(),
-                    enrollment.getCourse().getId()
-            );
+            enrollmentService.createEnrollment(studentId, courseId);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity
@@ -68,6 +68,7 @@ public class EnrollmentApi {
                     .body(new ErrorResponse(e.getMessage()));
         }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEnrollment(

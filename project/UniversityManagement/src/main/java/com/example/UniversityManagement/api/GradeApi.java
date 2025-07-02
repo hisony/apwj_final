@@ -63,8 +63,13 @@ public class GradeApi {
     }
 
     // Create a new grade
-    @PostMapping
-    public ResponseEntity<String> createGrade(@RequestParam Long studentId, @RequestParam Long courseId, @RequestParam String grade) {
+
+    // Create a new grade
+    //http://localhost:8080/api/grades/addGrade/4/2?grade=A
+    @PostMapping("/addGrade/{studentId}/{courseId}")
+    public ResponseEntity<String> createGrade(@PathVariable("studentId") Long studentId,
+                                              @PathVariable("courseId") Long courseId,
+                                              @RequestParam String grade) {
         try {
             gradeService.createGrade(studentId, courseId, grade);
             return new ResponseEntity<>("Grade created successfully", HttpStatus.CREATED);
@@ -73,16 +78,19 @@ public class GradeApi {
         }
     }
 
-    // Update an existing grade
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateGrade(@PathVariable("id") Long id, @RequestParam String grade) {
-        try {
-            gradeService.updateGrade(id, grade);
-            return new ResponseEntity<>("Grade updated successfully", HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+//    // Update an existing grade
+//    @PutMapping("/updateGrade/{studentId}/{courseId}")
+//    public ResponseEntity<String> updateGrade(@PathVariable("studentId") Long studentId,
+//                                              @PathVariable("courseId") Long courseId,
+//                                              @RequestParam String grade) {
+//        try {
+//            gradeService.createGrade(studentId, courseId, grade);
+//            return new ResponseEntity<>("Grade updated successfully", HttpStatus.OK);
+//        } catch (IllegalArgumentException e) {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//    }
+
 
     // Delete a grade by ID
     @DeleteMapping("/{id}")
